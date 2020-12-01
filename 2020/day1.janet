@@ -30,7 +30,26 @@
 (let [input [1721 979 366 299 675 1456]]
   (assert (= (part2 input) 241861950)))
 
+(defn part1-bsearch
+  [input]
+  (let [input (sorted input)]
+    (var x nil)
+    (loop [i :in input :until x]
+      (if-let [j (util/bsearch |(- (+ i $) 2020) input)]
+        (set x (* i j))))
+    x))
+
+(defn part2-bsearch
+  [input]
+  (let [input (sorted input)]
+  (var x nil)
+  (loop [i :in input :until x]
+    (loop [j :in input :until x]
+      (if-let [k (util/bsearch |(- (+ i j $) 2020) input)]
+        (set x (* i j k)))))
+  x))
+
 (if (= (in (dyn :args) 0) "day1.janet")
   (let [input (util/read-numbers stdin)]
-    (print "part1: " (part1 input))
-    (print "part2: " (part2 input))))
+    (print "part1: " (part1-bsearch input))
+    (print "part2: " (part2-bsearch input))))
