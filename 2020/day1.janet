@@ -3,23 +3,23 @@
 (defn part1
   ``find two numbers in input that sum to 2020 and multiply them``
   [input]
-  (var nums nil)
-  (loop [x :in input :until nums]
-    (loop [y :in input :until nums]
-      (when (= (+ x y) 2020)
-        (set nums [x y]))))
-  (* ;nums))
+  (var x nil)
+  (loop [i :in input :until x]
+    (loop [j :in input :until x]
+      (when (= (+ i j) 2020)
+        (set x (* i j)))))
+  x)
 
 (defn part2
   ``find three numbers in input that sum to 2020 and multiply them``
   [input]
-  (var nums nil)
-  (loop [x :in input :until nums]
-    (loop [y :in input :until nums]
-      (loop [z :in input :until nums]
-        (when (= (+ x y z) 2020)
-          (set nums [x y z])))))
-  (* ;nums))
+  (var x nil)
+  (loop [i :in input :until x]
+    (loop [j :in input :until x]
+      (loop [k :in input :until x]
+        (when (= (+ i j k) 2020)
+          (set x (* i j k))))))
+  x)
 
 (defn part1-bsearch
   [input]
