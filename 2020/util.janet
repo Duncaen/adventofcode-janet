@@ -1,5 +1,5 @@
 (defn read-numbers
-  ``read line separated numbers as array``
+  ``Read line separated from `f`.``
   [f]
   (def res @[])
   (loop [line :iterate (file/read f :line)]
