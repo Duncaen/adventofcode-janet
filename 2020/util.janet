@@ -14,12 +14,11 @@
   (var l 0)
   (var r (- (length ind) 1))
   (var res nil)
-  (while (if (<= l r) (nil? res))
+  (while (and (<= l r) (nil? res))
     (let [m (math/floor (/ (+ l r) 2))
           n (in ind m)
           c (pred n)]
-      (cond
-            (< c 0) (set l (+ m 1))
-            (> c 0) (set r (- m 1))
+      (cond (> c 0) (set l (+ m 1))
+            (< c 0) (set r (- m 1))
             (set res n))))
   res)

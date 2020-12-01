@@ -26,7 +26,7 @@
   (let [input (sorted input)]
     (var x nil)
     (loop [i :in input :until x]
-      (if-let [j (util/bsearch |(- (+ i $) 2020) input)]
+      (if-let [j (util/bsearch |(- 2020 (+ i $)) input)]
         (set x (* i j))))
     x))
 
@@ -36,7 +36,7 @@
   (var x nil)
   (loop [i :in input :until x]
     (loop [j :in input :until x]
-      (if-let [k (util/bsearch |(- (+ i j $) 2020) input)]
+      (if-let [k (util/bsearch |(- 2020 (+ i j $)) input)]
         (set x (* i j k)))))
   x))
 
