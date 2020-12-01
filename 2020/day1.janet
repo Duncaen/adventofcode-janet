@@ -10,11 +10,6 @@
         (set nums [x y]))))
   (* ;nums))
 
-# test
-(let [input [1721 979 366 299 675 1456]]
-  (assert (= (part1 input) 514579)))
-
-
 (defn part2
   ``find three numbers in input that sum to 2020 and multiply them``
   [input]
@@ -25,10 +20,6 @@
         (when (= (+ x y z) 2020)
           (set nums [x y z])))))
   (* ;nums))
-
-# test
-(let [input [1721 979 366 299 675 1456]]
-  (assert (= (part2 input) 241861950)))
 
 (defn part1-bsearch
   [input]
