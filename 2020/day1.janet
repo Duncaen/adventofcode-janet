@@ -1,6 +1,6 @@
 (import util)
 
-(defn- part1
+(defn part1
   ``find two numbers in input that sum to 2020 and multiply them``
   [input]
   (var nums nil)
@@ -14,11 +14,8 @@
 (let [input [1721 979 366 299 675 1456]]
   (assert (= (part1 input) 514579)))
 
-# result
-(let [input (util/read-numbers "day1.in")]
-  (printf "part1: %d" (part1 input)))
 
-(defn- part2
+(defn part2
   ``find three numbers in input that sum to 2020 and multiply them``
   [input]
   (var nums nil)
@@ -33,6 +30,7 @@
 (let [input [1721 979 366 299 675 1456]]
   (assert (= (part2 input) 241861950)))
 
-# result
-(let [input (util/read-numbers "day1.in")]
-  (printf "part2: %d" (part2 input)))
+(if (= (in (dyn :args) 0) "day1.janet")
+  (let [input (util/read-numbers stdin)]
+    (print "part1: " (part1 input))
+    (print "part2: " (part2 input))))
