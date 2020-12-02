@@ -40,6 +40,23 @@
         (set x (* i j k)))))
   x))
 
+(defn part1-shorter
+  ``find two numbers in input that sum to 2020 and multiply them``
+  [input]
+  (first (seq [i :in input
+               j :in input
+                 :when (= 2020 (+ i j))]
+              (* i j))))
+
+(defn part2-shorter
+  ``find two numbers in input that sum to 2020 and multiply them``
+  [input]
+  (first (seq [i :in input
+               j :in input
+               k :in input
+                 :when (= 2020 (+ i j k))]
+              (* i j k))))
+
 (if (= (in (dyn :args) 0) "day1.janet")
   (let [input (util/read-numbers stdin)]
     (print "part1: " (part1-bsearch input))
