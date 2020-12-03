@@ -19,11 +19,9 @@
 
 (defn- trees-in-slope-shorter
   [input right down]
-  (+ ;(seq [y :range [down (length input) down]
-            :let [line (in input y)
-                  x (% (* (/ y down) right) (length line))]
-            :when (= (chr "#") (in line x))]
-           1)))
+  (length (seq [y :range [down (length input) down]
+                :when (= (in (in input y) (% (* (/ y down) right) (length (in input y))))
+                         (chr "#"))])))
 
 (defn part1
   [input]
