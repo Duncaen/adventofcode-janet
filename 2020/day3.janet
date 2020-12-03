@@ -17,14 +17,22 @@
       (when tree (++ trees))))
   trees)
 
+(defn- trees-in-slope-shorter
+  [input right down]
+  (+ ;(seq [y :range [down (length input) down]
+            :let [line (in input y)
+                  x (% (* (/ y down) right) (length line))]
+            :when (= (chr "#") (in line x))]
+           1)))
+
 (defn part1
   [input]
-  (trees-in-slope input 3 1))
+  (trees-in-slope-shorter input 3 1))
 
 (defn part2
   [input]
   (* ;(seq [slope :in [[1 1] [3 1] [5 1] [7 1] [1 2]]]
-           (trees-in-slope input (in slope 0) (in slope 1)))))
+           (trees-in-slope-shorter input (in slope 0) (in slope 1)))))
 
 (if (= (in (dyn :args) 0) "day3.janet")
   (let [input (file/read stdin :all)
