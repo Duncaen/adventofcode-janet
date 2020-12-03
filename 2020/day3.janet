@@ -20,7 +20,9 @@
 (defn- trees-in-slope-shorter
   [input right down]
   (length (seq [y :range [down (length input) down]
-                :when (= (in (in input y) (% (* (/ y down) right) (length (in input y))))
+                :when (= (in (in input y)
+                             (% (* (/ y down) right)
+                                (length (in input y))))
                          (chr "#"))])))
 
 (defn part1
@@ -29,8 +31,8 @@
 
 (defn part2
   [input]
-  (* ;(seq [slope :in [[1 1] [3 1] [5 1] [7 1] [1 2]]]
-           (trees-in-slope-shorter input (in slope 0) (in slope 1)))))
+  (apply * (seq [slope :in [[1 1] [3 1] [5 1] [7 1] [1 2]]]
+                (trees-in-slope-shorter input ;slope))))
 
 (if (= (in (dyn :args) 0) "day3.janet")
   (let [input (file/read stdin :all)
