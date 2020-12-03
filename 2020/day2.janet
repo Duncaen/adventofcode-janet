@@ -4,19 +4,22 @@
                      (/ (<- :d+) ,scan-number) " "
                      (<- :w) ": "
                      (<- :w+) "\n")))))
+(defn- part1-valid?
+  [[min max char pass]]
+  (<= min (length (string/find-all char pass)) max))
 
 (defn part1
   [inputs]
-  (length (seq [[min max char pass] :in inputs
-                :when (<= min (length (string/find-all char pass)) max)])))
+  (count part1-valid? inputs))
+
+(defn- part2-valid?
+  [[min max char pass]]
+  (not= (= (in pass (- min 1)) (in char 0))
+        (= (in pass (- max 1)) (in char 0))))
 
 (defn part2
   [inputs]
-  (length (seq [[min max char pass] :in inputs
-               :let [a (in pass (- min 1))
-                     b (in pass (- max 1))
-                     c (in char 0)]
-               :when (and (or (= a c) (= b c)) (not= a b))])))
+  (count part2-valid? inputs))
 
 (if (= (in (dyn :args) 0) "day2.janet")
   (let [input (file/read stdin :all)
