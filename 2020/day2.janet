@@ -1,30 +1,22 @@
 (def grammar
-  ~{:line (/ (* (<- :d+) "-" (<- :d+) " " (<- :w) ": " (<- :w+) "\n")
-             ,(fn fmt-line[min max char password] {:min (scan-number min)
-                                                   :max (scan-number max)
-                                                   :char char
-                                                   :password password}))
-    :main (some :line)})
+  (peg/compile
+    ~(some (group (* (/ (<- :d+) ,scan-number) "-"
+                     (/ (<- :d+) ,scan-number) " "
+                     (<- :w) ": "
+                     (<- :w+) "\n")))))
 
 (defn part1
   [inputs]
-  (var valid 0)
-  (each input inputs
-    (let [n (length (string/find-all (input :char) (input :password)))]
-      (when (and (>= n (input :min)) (<= n (input :max)))
-        (++ valid))))
-  valid)
+  (length (seq [[min max char pass] :in inputs
+                :when (<= min (length (string/find-all char pass)) max)])))
 
 (defn part2
   [inputs]
-  (var valid 0)
-  (each input inputs
-    (let [a (in (input :password) (- (input :min) 1))
-          b (in (input :password) (- (input :max) 1))
-          c (in (input :char) 0)]
-      (when (and (or (= a c) (= b c)) (not= a b))
-        (++ valid))))
-  valid)
+  (length (seq [[min max char pass] :in inputs
+               :let [a (in pass (- min 1))
+                     b (in pass (- max 1))
+                     c (in char 0)]
+               :when (and (or (= a c) (= b c)) (not= a b))])))
 
 (if (= (in (dyn :args) 0) "day2.janet")
   (let [input (file/read stdin :all)
